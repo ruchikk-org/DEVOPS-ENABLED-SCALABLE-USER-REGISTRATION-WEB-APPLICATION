@@ -6,9 +6,6 @@ from app.models import user
 from app.routers import users as user_router
 
 
-# Create database tables
-Base.metadata.create_all(bind=engine)
-
 
 app = FastAPI()
 
