@@ -5,15 +5,17 @@ on:
     branches:
       - main
 
+
 jobs:
 
-  build-and-push:
+  build-push:
 
     runs-on: ubuntu-latest
 
+
     steps:
 
-    - name: Checkout
+    - name: Checkout code
       uses: actions/checkout@v4
 
 
@@ -26,15 +28,19 @@ jobs:
 
     - name: Build Backend Image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/backend ./backend
+        docker build \
+        -t ${{ secrets.DOCKER_USERNAME }}/user-registration-backend:latest \
+        ./backend
 
 
     - name: Build Frontend Image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend ./frontend
+        docker build \
+        -t ${{ secrets.DOCKER_USERNAME }}/user-registration-frontend:latest \
+        ./frontend
 
 
     - name: Push Images
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/backend
-        docker push ${{ secrets.DOCKER_USERNAME }}/frontend
+        docker push ${{ secrets.DOCKER_USERNAME }}/user-registration-backend:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/user-registration-frontend:latest
