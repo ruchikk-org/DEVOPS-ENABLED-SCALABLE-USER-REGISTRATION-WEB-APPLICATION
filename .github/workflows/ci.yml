@@ -34,7 +34,12 @@ jobs:
         docker build -t ${{ secrets.DOCKER_USERNAME }}/frontend ./frontend
 
 
+<<<<<<< HEAD
     - name: Push Images
       run: |
         docker push ${{ secrets.DOCKER_USERNAME }}/backend
         docker push ${{ secrets.DOCKER_USERNAME }}/frontend
+=======
+    - name: Stop Containers
+      run: docker compose down
+>>>>>>> 6d8597c4e7f21066753094759c39a904d160fb76
