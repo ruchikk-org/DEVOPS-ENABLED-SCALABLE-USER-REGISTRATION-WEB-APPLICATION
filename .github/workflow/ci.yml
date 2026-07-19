@@ -1,9 +1,14 @@
-name: CI-CD Pipeline
+name: CI Pipeline
 
 on:
   push:
     branches:
       - main
+
+  pull_request:
+    branches:
+      - main
+
 
 jobs:
 
@@ -13,7 +18,7 @@ jobs:
 
     steps:
 
-    - name: Checkout code
+    - name: Checkout Repository
       uses: actions/checkout@v4
 
 
@@ -21,9 +26,13 @@ jobs:
       run: docker compose build
 
 
-    - name: Run Containers
+    - name: Start Containers
       run: docker compose up -d
 
 
     - name: Check Running Containers
       run: docker ps
+
+
+    - name: Stop Containers
+      run: docker compose down
