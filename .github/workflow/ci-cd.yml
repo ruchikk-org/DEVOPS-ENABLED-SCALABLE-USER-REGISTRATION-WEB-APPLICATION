@@ -1,0 +1,29 @@
+name: CI-CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+
+    - name: Build Docker Images
+      run: docker compose build
+
+
+    - name: Run Containers
+      run: docker compose up -d
+
+
+    - name: Check Running Containers
+      run: docker ps
