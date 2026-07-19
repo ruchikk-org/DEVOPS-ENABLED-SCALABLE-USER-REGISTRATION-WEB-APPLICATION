@@ -23,7 +23,7 @@ jobs:
 
 
     - name: Build Docker Images
-      run: docker compose build
+      run: docker compose up --build
 
 
     - name: Start Containers
