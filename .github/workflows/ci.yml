@@ -29,14 +29,14 @@ jobs:
     - name: Build Backend Image
       run: |
         docker build \
-        -t ${{ secrets.DOCKER_USERNAME }}/user-registration-backend:latest \
+        -t ${{ secrets.RUCHIKK }}/user-registration-backend:latest \
         ./backend
 
 
     - name: Build Frontend Image
       run: |
         docker build \
-        -t ${{ secrets.DOCKER_USERNAME }}/user-registration-frontend:latest \
+        -t ${{ secrets.RUCHIKK }}/user-registration-frontend:latest \
         ./frontend
 
 
