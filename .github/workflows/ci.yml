@@ -21,11 +21,11 @@ jobs:
 
       - name: Build Backend Image
         run: |
-          docker build -t ruchikk/user-registration-backend:latest ./backend
+          docker build -t ruchikk_org/user-registration-backend:latest ./backend
 
       - name: Build Frontend Image
         run: |
-          docker build -t ruchikk/user-registration-frontend:latest ./frontend
+          docker build -t ruchikk_org/user-registration-frontend:latest ./frontend
 
       - name: Push Backend Image
         run: |
