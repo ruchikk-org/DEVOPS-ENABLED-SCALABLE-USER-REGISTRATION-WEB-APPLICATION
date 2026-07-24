@@ -1,34 +1,39 @@
 import { useState } from "react";
 import api from "../services/api";
-export default Register;
 
 
-function Register(){
-
-    const [user,setUser] = useState({
-        full_name:"",
-        email:"",
-        phone:"",
-        password:""
-    });
+const initialState = {
+    full_name: "",
+    email: "",
+    phone: "",
+    password: ""
+};
 
 
-    const handleChange=(e)=>{
+function Register() {
+
+
+    const [user, setUser] = useState(initialState);
+    const [message, setMessage] = useState("");
+
+
+
+    const handleChange = (e) => {
 
         setUser({
             ...user,
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
         });
 
     };
 
 
-    const register = async(e)=>{
+
+    const register = async (e) => {
 
         e.preventDefault();
 
-
-        try{
+        try {
 
             const response = await api.post(
                 "/users/register",
@@ -36,16 +41,28 @@ function Register(){
             );
 
 
-            alert("Registration Successful");
-
             console.log(response.data);
 
 
-        }
-        catch(error){
+            // Show success message
+            setMessage("Registration Successful");
 
-            alert(
-                error.response.data.detail
+
+            // Clear all input fields
+            setUser({
+                full_name: "",
+                email: "",
+                phone: "",
+                password: ""
+            });
+
+
+        }
+        catch(error) {
+
+            setMessage(
+                error.response?.data?.detail || 
+                "Registration Failed"
             );
 
         }
@@ -53,58 +70,85 @@ function Register(){
     };
 
 
-    return(
 
-<div className="card">
+    return (
 
-<h2>
-Register
-</h2>
+        <div className="card">
 
 
-<form onSubmit={register}>
+            <h2>
+                Register
+            </h2>
 
 
-<input
-name="full_name"
-placeholder="Full Name"
-onChange={handleChange}
-/>
+            {
+                message && (
+                    <p>
+                        {message}
+                    </p>
+                )
+            }
 
 
-<input
-name="email"
-placeholder="Email"
-onChange={handleChange}
-/>
+
+            <form onSubmit={register}>
 
 
-<input
-name="phone"
-placeholder="Phone"
-onChange={handleChange}
-/>
+                <input
+                    name="full_name"
+                    placeholder="Full Name"
+                    value={user.full_name}
+                    onChange={handleChange}
+                    required
+                />
 
 
-<input
-name="password"
-type="password"
-placeholder="Password"
-onChange={handleChange}
-/>
+
+                <input
+                    name="email"
+                    type="email"
+                    placeholder="Email"
+                    value={user.email}
+                    onChange={handleChange}
+                    required
+                />
 
 
-<button>
-Register
-</button>
+
+                <input
+                    name="phone"
+                    placeholder="Phone"
+                    value={user.phone}
+                    onChange={handleChange}
+                    required
+                />
 
 
-</form>
+
+                <input
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    value={user.password}
+                    onChange={handleChange}
+                    required
+                />
 
 
-</div>
 
-)
+                <button type="submit">
+                    Register
+                </button>
+
+
+            </form>
+
+
+        </div>
+
+    );
+
 }
 
 
+export default Register;
