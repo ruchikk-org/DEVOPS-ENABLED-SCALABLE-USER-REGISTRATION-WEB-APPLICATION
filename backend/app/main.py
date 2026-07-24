@@ -2,14 +2,16 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database import engine, Base
-from app.models import user
+from app.models.user import User
 from app.routers import users as user_router
 
-
+# Create database tables automatically
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
 
+# CORS Configuration
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -24,12 +26,15 @@ app.add_middleware(
 )
 
 
+# User routes
 app.include_router(user_router.router)
 
 
 @app.get("/")
 def root():
-    return {"message": "API is running"}
+    return {
+        "message": "API is running"
+    }
 
 
 @app.get("/health")
