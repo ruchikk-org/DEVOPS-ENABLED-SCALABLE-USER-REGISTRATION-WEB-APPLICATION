@@ -18,12 +18,15 @@ app.add_middleware(
         "http://localhost:5175",
         "http://localhost:5173",
         "http://localhost:5174",
-        "http://localhost:4173"
+        "http://localhost:4173",
+        "https://frontendd-gkcne8ahgafjhvd4.canadaeast-01.azurewebsites.net"
     ],
-    allow_credentials=True,
+    
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+    
 
 
 # User routes
