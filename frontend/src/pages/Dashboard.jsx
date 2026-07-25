@@ -85,10 +85,10 @@ function Dashboard(){
 
             <h1 className="app-title">
 
-              DEVOPS USER REGISTRATION SYSTEM
+                DEVOPS-ENABLED SCALABLE
                 <br />
 
-               
+                USER REGISTRATION WEB APPLICATION
 
             </h1>
 
